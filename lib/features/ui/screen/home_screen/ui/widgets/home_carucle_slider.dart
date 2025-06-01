@@ -22,7 +22,7 @@ class _HomeCarosulSliderState extends State<HomeCarosulSlider> {
               onPageChanged: (int curentendex, _) {
                 currentIndex.value = curentendex;
               },
-              height: 200.0,
+              height: 170.0,
               initialPage: 0,
               enableInfiniteScroll: true,
               autoPlay: true,

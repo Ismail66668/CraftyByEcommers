@@ -50,6 +50,10 @@ class AppThemes {
           fontWeight: FontWeight.w600,
           color: Colors.black87,
           letterSpacing: 0.4),
+      titleMedium: TextStyle(
+          fontSize: 22, color: Colors.black, fontWeight: FontWeight.w600),
+      titleSmall: TextStyle(
+          fontSize: 18, color: Colors.green, fontWeight: FontWeight.w500),
       bodyMedium: TextStyle(fontSize: 16, color: Colors.grey),
     );
   }

@@ -19,19 +19,40 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              SizedBox(height: 16),
-              ProductSearchBar(),
-              SizedBox(height: 16),
-              HomeCarosulSlider()
+              const SizedBox(height: 16),
+              const ProductSearchBar(),
+              const SizedBox(height: 16),
+              const HomeCarosulSlider(),
+              const SizedBox(height: 10),
+              _sectionHeader(() {}, 'Categories', 'See All'),
+              _sectionHeader(() {}, 'Poplur', 'See All'),
+              _sectionHeader(() {}, 'Spesal', 'See All'),
+              _sectionHeader(() {}, 'New', 'See All'),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _sectionHeader(VoidCallback onTap, String title, String buttonText) {
+    return Row(
+      children: [
+        Text(title, style: Theme.of(context).textTheme.titleMedium),
+        const Spacer(),
+        TextButton(
+          onPressed: () {},
+          child: Text(buttonText,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Colors.blue,
+                  )),
+        ),
+      ],
     );
   }
 
