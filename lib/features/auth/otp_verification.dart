@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/features/auth/set_password.dart';
-import 'package:ostad_ecommers_app/features/ui/widgets/app_logo.dart';
+import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerification extends StatelessWidget {

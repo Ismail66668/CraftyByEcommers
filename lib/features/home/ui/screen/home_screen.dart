@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ostad_ecommers_app/app/asste_path.dart';
-import 'package:ostad_ecommers_app/features/ui/screen/home_screen/ui/widgets/app_bar_icons.dart';
-import 'package:ostad_ecommers_app/features/ui/screen/home_screen/ui/widgets/product_searcg_bar.dart';
+import 'package:ostad_ecommers_app/features/app_widgets/app_bar_icons.dart';
+import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.dart';
+import 'package:ostad_ecommers_app/features/home/widgets/product_searcg_bar.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
 
-import '../widgets/home_carucle_slider.dart';
+import '../../widgets/home_carucle_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: _appBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
               const SizedBox(height: 16),
@@ -29,7 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               const HomeCarosulSlider(),
               const SizedBox(height: 10),
-              _sectionHeader(() {}, 'Categories', 'See All'),
+              _sectionHeader(() {
+                Navigator.pushNamed(context, ProductCatagoriScreen.name);
+              }, 'All Catagori', 'See All'),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 130,
+                child: getCatagoriList(),
+              ),
               _sectionHeader(() {}, 'Poplur', 'See All'),
               _sectionHeader(() {}, 'Spesal', 'See All'),
               _sectionHeader(() {}, 'New', 'See All'),
@@ -40,13 +49,28 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget getCatagoriList() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      shrinkWrap: true,
+      primary: false,
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return const Card(
+          elevation: 0,
+          child: ProductCatagoriItems(),
+        );
+      },
+    );
+  }
+
   Widget _sectionHeader(VoidCallback onTap, String title, String buttonText) {
     return Row(
       children: [
         Text(title, style: Theme.of(context).textTheme.titleMedium),
         const Spacer(),
         TextButton(
-          onPressed: () {},
+          onPressed: onTap,
           child: Text(buttonText,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: Colors.blue,

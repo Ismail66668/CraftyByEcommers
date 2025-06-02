@@ -4,6 +4,11 @@ import 'package:ostad_ecommers_app/app/app_colors.dart';
 class AppThemes {
   static ThemeData get lightThemsData {
     return ThemeData(
+      appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black54)),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: const TextStyle(
             color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w400),

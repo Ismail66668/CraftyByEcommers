@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/features/auth/otp_verification.dart';
-import 'package:ostad_ecommers_app/features/ui/widgets/app_logo.dart';
+import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 
 class EmailVerification extends StatelessWidget {
-  const EmailVerification({super.key});
+  EmailVerification({super.key});
   static const String name = '/emailVerify';
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
-
     return Scaffold(
       body: SafeArea(
           child: Padding(

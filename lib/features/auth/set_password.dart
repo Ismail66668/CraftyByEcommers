@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
-import 'package:ostad_ecommers_app/features/ui/widgets/app_logo.dart';
+import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 
 class SetPassword extends StatefulWidget {
   const SetPassword({super.key});
