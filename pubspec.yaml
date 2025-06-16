@@ -23,7 +23,7 @@ dependencies:
   email_validator: 
   pin_code_fields:
   carousel_slider:
-  get:
+  get: 
 
 dev_dependencies:
   flutter_test:

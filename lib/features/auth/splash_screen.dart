@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
+import 'package:ostad_ecommers_app/common/screen/main_botton_screen.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future _movetoLogingScreen() async {
     await Future.delayed(const Duration(seconds: 2));
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacementNamed(context, LogingScreen.name);
+    Navigator.pushReplacementNamed(context, MainBottonScreen.name);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.
 
 class ProductCatagoriScreen extends StatefulWidget {
   const ProductCatagoriScreen({super.key});
+
   static const String name = '/product_catagori';
 
   @override
@@ -14,6 +15,11 @@ class _ProductCatagoriScreenState extends State<ProductCatagoriScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios_new)),
         title: const Text('Catagori'),
       ),
       body: SingleChildScrollView(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:ostad_ecommers_app/app/asste_path.dart';
+import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_bar_icons.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_searcg_bar.dart';
-import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
+import 'package:ostad_ecommers_app/common/widget/product_card.dart';
 
 import '../../widgets/home_carucle_slider.dart';
 
@@ -32,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const HomeCarosulSlider(),
               const SizedBox(height: 10),
               _sectionHeader(() {
-                Navigator.pushNamed(context, ProductCatagoriScreen.name);
+                Get.find<MainBottomController>().moveToChange();
               }, 'All Catagori', 'See All'),
               const SizedBox(height: 10),
               SizedBox(
@@ -40,11 +42,50 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: getCatagoriList(),
               ),
               _sectionHeader(() {}, 'Poplur', 'See All'),
+              const SizedBox(height: 10),
+              _getProduct(),
               _sectionHeader(() {}, 'Spesal', 'See All'),
+              const SizedBox(
+                height: 8,
+              ),
+              _getProductList(),
               _sectionHeader(() {}, 'New', 'See All'),
+              const SizedBox(
+                height: 8,
+              ),
+              _getProductList(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox _getProductList() {
+    return SizedBox(
+      height: 210,
+      child: Expanded(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return const ProductCard();
+          },
+        ),
+      ),
+    );
+  }
+
+  SingleChildScrollView _getProduct() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [1, 2, 3, 4, 5]
+            .map((e) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3),
+                  child: ProductCard(),
+                ))
+            .toList(),
       ),
     );
   }
