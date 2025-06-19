@@ -16,8 +16,9 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 230,
       decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
         color: Colors.grey,
       ),
       child: Column(
@@ -27,7 +28,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                 onPageChanged: (int curentendex, _) {
                   currentIndex.value = curentendex;
                 },
-                height: 220.0,
+                height: 200.0,
                 initialPage: 0,
                 enableInfiniteScroll: true,
                 autoPlay: true,

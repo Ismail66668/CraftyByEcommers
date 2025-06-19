@@ -6,9 +6,11 @@ import 'package:ostad_ecommers_app/features/auth/otp_verification.dart';
 import 'package:ostad_ecommers_app/features/auth/set_password.dart';
 import 'package:ostad_ecommers_app/features/auth/singup_screen.dart';
 import 'package:ostad_ecommers_app/features/home/ui/screen/home_screen.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/add_rivew_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_detels_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_list_screen.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/review_screen.dart';
 import 'package:ostad_ecommers_app/features/wishlist/product/ui/screen/wish_product.dart';
 
 import '../features/auth/splash_screen.dart';
@@ -43,6 +45,10 @@ class AppRoutes {
     } else if (settings.name == ProductDetailsScreen.name) {
       final String productId = settings.arguments as String;
       screenWidget = ProductDetailsScreen(productId: productId);
+    } else if (settings.name == ReviewScreen.name) {
+      screenWidget = const ReviewScreen();
+    } else if (settings.name == AddRivewsScreen.name) {
+      screenWidget = const AddRivewsScreen();
     }
 
     return MaterialPageRoute(builder: (context) => screenWidget);

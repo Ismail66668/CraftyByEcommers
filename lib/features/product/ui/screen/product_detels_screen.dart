@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/app/app_colors.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/review_screen.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/color_picker.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/inc_dec_button.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/product_image_slider.dart';
@@ -23,7 +24,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(4.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +63,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ],
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: _onTapReviewButton,
                           child: const Text(
                             'Review',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
@@ -115,9 +117,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       'This is a sample product description. It provides detailsa of what to expect from the product.',
                       style: TextStyle(fontSize: 16, color: Colors.black54),
                     ),
+                    const SizedBox(height: 4),
                     Container(
-                      padding: const EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
                         color: AppColors.themeColor.withOpacity(0.3),
                       ),
                       child: Row(
@@ -154,5 +158,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
           ],
         ));
+  }
+
+  void _onTapReviewButton() {
+    Navigator.pushNamed(context, ReviewScreen.name);
   }
 }
