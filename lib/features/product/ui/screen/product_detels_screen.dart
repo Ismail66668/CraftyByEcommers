@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/app/app_colors.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/rating.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/review_screen.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/color_picker.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/inc_dec_button.dart';
@@ -54,13 +55,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     Row(
                       children: [
-                        const Wrap(
-                          children: [
-                            Text('4.5',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.grey)),
-                            Icon(Icons.star, color: Colors.amber, size: 20),
-                          ],
+                        GestureDetector(
+                          onTap: _onTapWriteReviewButton,
+                          child: const Wrap(
+                            children: [
+                              Text('4.5',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.grey)),
+                              Icon(Icons.star, color: Colors.amber, size: 20),
+                            ],
+                          ),
                         ),
                         TextButton(
                           onPressed: _onTapReviewButton,
@@ -162,5 +166,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   void _onTapReviewButton() {
     Navigator.pushNamed(context, ReviewScreen.name);
+  }
+
+  void _onTapWriteReviewButton() {
+    Navigator.pushNamed(context, Rating.name);
   }
 }

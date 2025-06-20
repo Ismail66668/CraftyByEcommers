@@ -24,6 +24,7 @@ dependencies:
   pin_code_fields:
   carousel_slider:
   get: 
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:

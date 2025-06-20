@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:ostad_ecommers_app/app/asste_path.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_bar_icons.dart';
+import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_searcg_bar.dart';
 import 'package:ostad_ecommers_app/common/widget/product_card.dart';
@@ -126,7 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
       title: SvgPicture.asset(AsstePath.navLogo),
       actions: [
         AppBarIconWidget(
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, LogingScreen.name);
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => const LogingScreen()));
+          },
           icon: Icons.person,
         ),
         AppBarIconWidget(

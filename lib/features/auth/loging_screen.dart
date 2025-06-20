@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ostad_ecommers_app/features/home/ui/screen/home_screen.dart';
+import 'package:ostad_ecommers_app/features/auth/singup_screen.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 
 class LogingScreen extends StatefulWidget {
@@ -120,7 +120,7 @@ class _LogingScreenState extends State<LogingScreen> {
   }
 
   void _onTapLoging(BuildContext context) {
-    Navigator.pushReplacementNamed(context, HomeScreen.name);
+    Navigator.pushReplacementNamed(context, SingupScreen.name);
   }
 
   @override

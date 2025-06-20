@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
+import 'package:ostad_ecommers_app/features/card/ui/screen/card_screen.dart';
 import 'package:ostad_ecommers_app/features/home/ui/screen/home_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
 import 'package:ostad_ecommers_app/features/wishlist/product/ui/screen/wish_product.dart';
@@ -17,7 +18,7 @@ class _MainBottonScreenState extends State<MainBottonScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const ProductCatagoriScreen(),
-    const ProductCatagoriScreen(),
+    const CardScreen(),
     const WishProductList(),
   ];
   @override

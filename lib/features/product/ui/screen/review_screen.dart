@@ -69,8 +69,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _addReview,
-        child: const Icon(Icons.add),
         backgroundColor: AppColors.themeColor,
+        child: const Icon(Icons.add),
       ),
     );
   }

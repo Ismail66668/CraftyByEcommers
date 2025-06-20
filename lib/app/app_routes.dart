@@ -10,6 +10,7 @@ import 'package:ostad_ecommers_app/features/product/ui/screen/add_rivew_screen.d
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_detels_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_list_screen.dart';
+import 'package:ostad_ecommers_app/features/product/ui/screen/rating.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/review_screen.dart';
 import 'package:ostad_ecommers_app/features/wishlist/product/ui/screen/wish_product.dart';
 
@@ -49,6 +50,10 @@ class AppRoutes {
       screenWidget = const ReviewScreen();
     } else if (settings.name == AddRivewsScreen.name) {
       screenWidget = const AddRivewsScreen();
+    } else if (settings.name == Rating.name) {
+      screenWidget = const Rating();
+    } else {
+      throw Exception('Route not found: ${settings.name}');
     }
 
     return MaterialPageRoute(builder: (context) => screenWidget);

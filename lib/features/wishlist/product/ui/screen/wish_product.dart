@@ -17,7 +17,7 @@ class _WishProductListState extends State<WishProductList> {
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (_, __) {
-        Get.find<MainBottomController>().backToHome();
+        _backToHome();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -25,7 +25,7 @@ class _WishProductListState extends State<WishProductList> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Get.find<MainBottomController>().backToHome();
+              _backToHome();
             },
           ),
         ),
@@ -47,5 +47,9 @@ class _WishProductListState extends State<WishProductList> {
         ),
       ),
     );
+  }
+
+  void _backToHome() {
+    Get.find<MainBottomController>().backToHome();
   }
 }
