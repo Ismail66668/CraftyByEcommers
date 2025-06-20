@@ -13,6 +13,8 @@ class MainBottomController extends GetxController {
     update();
   }
 
+  void df() {}
+
   void backToHome() {
     if (_curentIndex != 0) {
       _curentIndex = 0;
