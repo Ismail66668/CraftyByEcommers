@@ -5,6 +5,7 @@ import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
 import 'package:ostad_ecommers_app/features/auth/otp_verification.dart';
 import 'package:ostad_ecommers_app/features/auth/set_password.dart';
 import 'package:ostad_ecommers_app/features/auth/singup_screen.dart';
+import 'package:ostad_ecommers_app/features/card/ui/screen/card_screen.dart';
 import 'package:ostad_ecommers_app/features/home/ui/screen/home_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/add_rivew_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_catagori_screen.dart';
@@ -52,8 +53,8 @@ class AppRoutes {
       screenWidget = const AddRivewsScreen();
     } else if (settings.name == Rating.name) {
       screenWidget = const Rating();
-    } else {
-      throw Exception('Route not found: ${settings.name}');
+    } else if (settings.name == CardScreen.name) {
+      screenWidget = const CardScreen();
     }
 
     return MaterialPageRoute(builder: (context) => screenWidget);

@@ -30,12 +30,12 @@ class _WishProductListState extends State<WishProductList> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Expanded(
               child: GridView.builder(
-            itemCount: 20,
+            itemCount: 10,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               mainAxisSpacing: 2.0,
               crossAxisSpacing: 2.0,
               childAspectRatio: 0.8,

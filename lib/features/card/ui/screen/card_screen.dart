@@ -55,6 +55,8 @@ class _CardScreenState extends State<CardScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   'Product Name',
                                   style: TextStyle(
                                       fontSize: 18,
@@ -142,8 +144,6 @@ class _CardScreenState extends State<CardScreen> {
   }
 
   void _backToHome() {
-    Get.find<MainBottomController>()
-        .backToHome(); // Optionally, you can navigate to a specific screen if needed
-    // Navigator.pushNamed(context, HomeScreen.name);
+    Get.find<MainBottomController>().backToHome();
   }
 }

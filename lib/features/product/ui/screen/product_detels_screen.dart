@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/app/app_colors.dart';
+import 'package:ostad_ecommers_app/features/card/ui/screen/card_screen.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/rating.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/review_screen.dart';
 import 'package:ostad_ecommers_app/features/product/widgets/color_picker.dart';
@@ -150,7 +151,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           SizedBox(
                             width: 120,
                             child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: _addToCard,
                                 child: const Text('Add To Card')),
                           )
                         ],
@@ -162,6 +163,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
           ],
         ));
+  }
+
+  void _addToCard() {
+    Navigator.pushNamed(context, CardScreen.name);
   }
 
   void _onTapReviewButton() {
