@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
                       topLeft: Radius.circular(8))),
               width: 160,
               child: SvgPicture.asset(
-                AsstePath.productImage,
+                AsstePath.navLogo,
                 height: 135,
                 width: 160,
                 fit: BoxFit.fitWidth,

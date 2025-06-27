@@ -1,8 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ostad_ecommers_app/features/auth/email_verification.dart';
+import 'package:get/get.dart';
+import 'package:ostad_ecommers_app/common/widget/circlur_progress_indicator.dart';
+import 'package:ostad_ecommers_app/core/ui/widgets/snekbar_massage.dart';
+import 'package:ostad_ecommers_app/features/auth/data/model/singup_request_model.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
+import 'package:ostad_ecommers_app/features/auth/otp_verification.dart';
+import 'package:ostad_ecommers_app/features/auth/ui/controller/sing_up_controller.dart';
 
 class SingupScreen extends StatefulWidget {
   const SingupScreen({super.key});
@@ -14,11 +19,14 @@ class SingupScreen extends StatefulWidget {
 
 class _SingupScreenState extends State<SingupScreen> {
   final GlobalKey<FormState> _fromKye = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _fastnameController = TextEditingController();
   final TextEditingController _lastnameController = TextEditingController();
   final TextEditingController _citynameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final SingUpController singUpController = Get.find<SingUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +55,26 @@ class _SingupScreenState extends State<SingupScreen> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      RegExp emailRegex = RegExp(
+                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      } else if (!emailRegex.hasMatch(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'email',
+                      hintText: 'Enter your email',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
                   TextFormField(
                     controller: _fastnameController,
                     keyboardType: TextInputType.emailAddress,
@@ -81,11 +109,14 @@ class _SingupScreenState extends State<SingupScreen> {
                   const SizedBox(height: 10),
                   TextFormField(
                     controller: _phoneController,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
+                      RegExp phoneRegex = RegExp(r'^\+?[0-9]{11}$');
                       if (value == null || value.isEmpty) {
                         return 'Please enter your Phone Number';
+                      } else if (!phoneRegex.hasMatch(value)) {
+                        return 'Please enter a valid Phone Number';
                       }
                       return null;
                     },
@@ -128,11 +159,33 @@ class _SingupScreenState extends State<SingupScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ElevatedButton(
-                      onPressed: () {
-                        _onTapSingup(context);
-                      },
-                      child: const Text('SINGUP')),
+                  TextFormField(
+                    controller: _passwordController,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'Enter your Password',
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  GetBuilder<SingUpController>(builder: (controller) {
+                    return Visibility(
+                      visible: singUpController.lodingProggress == false,
+                      replacement: const CirclurProgressIndicator(),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            _onTapSingup();
+                          },
+                          child: const Text('SINGUP')),
+                    );
+                  }),
                   const SizedBox(height: 20),
                   RichText(
                       text: TextSpan(
@@ -160,18 +213,20 @@ class _SingupScreenState extends State<SingupScreen> {
     ));
   }
 
-  void _onTapSingup(BuildContext context) {
-    // if (_fromKye.currentState!.validate()) {
-    //   // Perform signup logic here
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('Signup Successful')),
-    //   );
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('Please fill all fields correctly')),
-    //   );
-    // }
-    Navigator.pushReplacementNamed(context, EmailVerification.name);
+  Future<void> _onTapSingup() async {
+    if (_fromKye.currentState!.validate()) {
+      final SingupRequestModel model = SingupRequestModel(
+          password: _passwordController.text,
+          firstName: _fastnameController.text.trim(),
+          lastName: _lastnameController.text.trim(),
+          phone: _phoneController.text.trim(),
+          city: _citynameController.text.trim(),
+          email: _emailController.text.trim());
+
+      await singUpController.singup(model);
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, OtpVerification.name);
+    }
   }
 
   @override

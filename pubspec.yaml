@@ -25,6 +25,8 @@ dependencies:
   carousel_slider:
   get: 
   flutter_rating_bar:
+  http:
+  logger:
 
 dev_dependencies:
   flutter_test:

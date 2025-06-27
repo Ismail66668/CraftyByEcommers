@@ -38,64 +38,66 @@ class _CardScreenState extends State<CardScreen> {
                 itemCount: 13,
                 itemBuilder: (context, index) {
                   return Card(
-                      child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AsstePath.productImage,
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.scaleDown,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  'Product Name',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black87),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () {
-                                    // Handle delete action
-                                  },
-                                )
-                              ],
-                            ),
-                            const Text(
-                              'Color: Red, Size: M',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.black54),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '\$100',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.themeColor),
-                                ),
-                                IncDecButton(onChange: (value) {
-                                  // Handle quantity change
-                                }),
-                              ],
-                            ),
-                          ],
+                      child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          AsstePath.navLogo,
+                          width: 100,
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    'Product Name',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black87),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      // Handle delete action
+                                    },
+                                  )
+                                ],
+                              ),
+                              const Text(
+                                'Color: Red, Size: M',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black54),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '\$100',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.themeColor),
+                                  ),
+                                  IncDecButton(onChange: (value) {
+                                    // Handle quantity change
+                                  }),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ));
                 },
               ),

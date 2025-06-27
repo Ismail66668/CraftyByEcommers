@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/common/screen/main_botton_screen.dart';
-import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
 
 class SetPassword extends StatefulWidget {
