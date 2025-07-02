@@ -27,6 +27,7 @@ dependencies:
   flutter_rating_bar:
   http:
   logger:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

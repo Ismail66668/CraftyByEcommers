@@ -30,7 +30,8 @@ class AppRoutes {
     } else if (settings.name == EmailVerification.name) {
       screenWidget = EmailVerification();
     } else if (settings.name == OtpVerification.name) {
-      screenWidget = OtpVerification();
+      final String email = settings.arguments as String;
+      screenWidget = OtpVerification(email: email);
     } else if (settings.name == SetPassword.name) {
       screenWidget = const SetPassword();
     } else if (settings.name == HomeScreen.name) {

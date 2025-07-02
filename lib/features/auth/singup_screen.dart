@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ostad_ecommers_app/common/widget/circlur_progress_indicator.dart';
 import 'package:ostad_ecommers_app/core/ui/widgets/snekbar_massage.dart';
 import 'package:ostad_ecommers_app/features/auth/data/model/singup_request_model.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
@@ -26,7 +25,7 @@ class _SingupScreenState extends State<SingupScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final SingUpController singUpController = Get.find<SingUpController>();
+  final SignUpController signUpController = Get.find<SignUpController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,8 +163,15 @@ class _SingupScreenState extends State<SingupScreen> {
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
+                      // RegExp passwordRegex =
+                      //     RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
+                        return 'Please enter your Password';
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 characters';
+                        // } else if (!passwordRegex.hasMatch(value)) {
+                        //   return 'Password must contain letters and numbers';
+                        // }
                       }
                       return null;
                     },
@@ -175,10 +181,10 @@ class _SingupScreenState extends State<SingupScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  GetBuilder<SingUpController>(builder: (controller) {
+                  GetBuilder<SignUpController>(builder: (controller) {
                     return Visibility(
-                      visible: singUpController.lodingProggress == false,
-                      replacement: const CirclurProgressIndicator(),
+                      visible: controller.inProgress == false,
+                      replacement: const CircularProgressIndicator(),
                       child: ElevatedButton(
                           onPressed: () {
                             _onTapSingup();
@@ -223,9 +229,20 @@ class _SingupScreenState extends State<SingupScreen> {
           city: _citynameController.text.trim(),
           email: _emailController.text.trim());
 
-      await singUpController.singup(model);
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, OtpVerification.name);
+      final bool isSuccess = await signUpController.signUp(model);
+      if (isSuccess) {
+        // ignore: use_build_context_synchronously
+        Navigator.pushNamed(context, OtpVerification.name,
+            arguments: _emailController.text.trim());
+        // ignore: use_build_context_synchronously
+        showSnackbarMassage(context, signUpController.message, false);
+      } else {
+        showSnackbarMassage(
+            // ignore: use_build_context_synchronously
+            context,
+            signUpController.errorMessage ?? '',
+            true);
+      }
     }
   }
 

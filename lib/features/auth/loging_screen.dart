@@ -1,7 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ostad_ecommers_app/common/screen/main_botton_screen.dart';
+import 'package:ostad_ecommers_app/common/widget/circlur_progress_indicator.dart';
+import 'package:ostad_ecommers_app/core/ui/widgets/snekbar_massage.dart';
+import 'package:ostad_ecommers_app/features/auth/data/model/login_request_model.dart';
 import 'package:ostad_ecommers_app/features/auth/singup_screen.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_logo.dart';
+import 'package:ostad_ecommers_app/features/auth/ui/controller/loging_controller.dart';
 
 class LogingScreen extends StatefulWidget {
   const LogingScreen({super.key});
@@ -15,6 +21,7 @@ class _LogingScreenState extends State<LogingScreen> {
   final GlobalKey<FormState> _fromKye = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final LogingController _logingController = Get.find<LogingController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,10 +79,10 @@ class _LogingScreenState extends State<LogingScreen> {
                       return 'Please enter your password';
                     } else if (value.length < 6) {
                       return 'Password must be at least 6 characters';
-                    } else if (!RegExp(
-                            r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$')
-                        .hasMatch(value)) {
-                      return 'Password must contain letters and numbers';
+                      // } else if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{}$')
+                      //     .hasMatch(value)) {
+                      //   return 'Password must contain letters and numbers';
+                      // }
                     }
                     return null;
                   },
@@ -85,15 +92,20 @@ class _LogingScreenState extends State<LogingScreen> {
                   ),
                 ),
                 const SizedBox(height: 18),
-                ElevatedButton(
-                  onPressed: () {
-                    _onTapLoging(context);
-                  },
-                  child: const Text(
-                    'LOGIN',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                GetBuilder<LogingController>(builder: (controller) {
+                  return Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const CirclurProgressIndicator(),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _onTapSingIn();
+                        },
+                        child: const Text(
+                          'LOGIN',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ));
+                }),
                 const SizedBox(height: 10),
                 RichText(
                     text: TextSpan(
@@ -117,6 +129,27 @@ class _LogingScreenState extends State<LogingScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _onTapSingIn() async {
+    if (_fromKye.currentState!.validate()) {
+      LogingRequestModel model = LogingRequestModel(
+          email: _emailController.text.trim(),
+          password: _passwordController.text);
+
+      final bool isSuccess = await _logingController.loging(model);
+      if (isSuccess) {
+        Navigator.pushNamedAndRemoveUntil(
+            // ignore: use_build_context_synchronously
+            context,
+            MainBottonScreen.name,
+            (predicate) => false);
+        showSnackbarMassage(context, 'Successfully Loging', false);
+      } else {
+        // ignore: use_build_context_synchronously
+        showSnackbarMassage(context, _logingController.errorMessage!, true);
+      }
+    }
   }
 
   void _onTapLoging(BuildContext context) {
