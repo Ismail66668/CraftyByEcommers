@@ -1,11 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:ostad_ecommers_app/app/app_colors.dart';
+import 'package:ostad_ecommers_app/features/home/data/model/slider_model.dart';
 
 class HomeCarosulSlider extends StatefulWidget {
   const HomeCarosulSlider({
     super.key,
+    required this.slider,
   });
+  final List<SliderModel> slider;
 
   @override
   State<HomeCarosulSlider> createState() => _HomeCarosulSliderState();
@@ -30,19 +33,22 @@ class _HomeCarosulSliderState extends State<HomeCarosulSlider> {
               autoPlayAnimationDuration: const Duration(milliseconds: 800),
               enlargeCenterPage: true,
               viewportFraction: 1.0),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.slider.map((slider) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.symmetric(horizontal: 1.0),
                     decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(slider.photoUrl),
+                            fit: BoxFit.cover),
                         color: AppColors.themeColor,
                         borderRadius: BorderRadius.circular(8.0)),
                     padding: const EdgeInsets.all(8.0),
                     alignment: Alignment.center,
                     child: Text(
-                      'text $i',
+                      slider.description,
                       style:
                           const TextStyle(fontSize: 16.0, color: Colors.white),
                     ));

@@ -5,6 +5,7 @@ import 'package:ostad_ecommers_app/app/asste_path.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_bar_icons.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
+import 'package:ostad_ecommers_app/features/home/ui/controller/home_slider_controller.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_searcg_bar.dart';
 import 'package:ostad_ecommers_app/common/widget/product_card.dart';
@@ -21,6 +22,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    Get.find<HomeSliderController>().getHomeSliders();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
@@ -32,7 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               const ProductSearchBar(),
               const SizedBox(height: 16),
-              const HomeCarosulSlider(),
+              GetBuilder<HomeSliderController>(builder: (sliderController) {
+                if (sliderController.inProgress) {
+                  return const CircularProgressIndicator();
+                }
+                return HomeCarosulSlider(
+                  slider: sliderController.sliderModelList,
+                );
+              }),
               const SizedBox(height: 10),
               _sectionHeader(() {
                 Get.find<MainBottomController>().moveToChange();

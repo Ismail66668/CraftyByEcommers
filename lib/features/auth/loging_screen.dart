@@ -144,6 +144,7 @@ class _LogingScreenState extends State<LogingScreen> {
             context,
             MainBottonScreen.name,
             (predicate) => false);
+        // ignore: use_build_context_synchronously
         showSnackbarMassage(context, 'Successfully Loging', false);
       } else {
         // ignore: use_build_context_synchronously
