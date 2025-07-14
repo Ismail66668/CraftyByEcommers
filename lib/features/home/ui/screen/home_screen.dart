@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ostad_ecommers_app/app/asste_path.dart';
+import 'package:ostad_ecommers_app/common/contoller/catagory_list_controller.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/features/app_widgets/app_bar_icons.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
@@ -21,12 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Get.find<HomeSliderController>().getHomeSliders();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,17 +101,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget getCatagoriList() {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      primary: false,
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return const Card(
-          elevation: 0,
-          child: ProductCatagoriItems(),
+    return SizedBox(
+      height: 100,
+      child: GetBuilder<CatagoryListController>(builder: (controller) {
+        if (controller.initialLoadingInProgress) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          primary: false,
+          itemCount: controller.homeCategoryListItemLength,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 0,
+              child: ProductCatagoriItems(
+                categoryModel: controller.categoryModelList[index],
+              ),
+            );
+          },
         );
-      },
+      }),
     );
   }
 

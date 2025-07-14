@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ostad_ecommers_app/common/contoller/auth_controller.dart';
+import 'package:ostad_ecommers_app/common/contoller/catagory_list_controller.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/core/service/network/network_clint.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
@@ -19,6 +20,7 @@ class ControllerBinders extends Bindings {
     Get.put(AuthController());
     Get.put(LogingController());
     Get.put(HomeSliderController());
+    Get.put(CatagoryListController());
   }
 
   void _onUnAuthorize() {

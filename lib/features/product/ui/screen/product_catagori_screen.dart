@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ostad_ecommers_app/common/contoller/catagory_list_controller.dart';
 import 'package:ostad_ecommers_app/common/contoller/main_bottom_controller.dart';
 import 'package:ostad_ecommers_app/features/home/widgets/product_catagori_items.dart';
 
@@ -13,6 +14,36 @@ class ProductCatagoriScreen extends StatefulWidget {
 }
 
 class _ProductCatagoriScreenState extends State<ProductCatagoriScreen> {
+  final ScrollController scrollController = ScrollController();
+  // final CatagoryListController catagoryListController =
+  //     Get.find<CatagoryListController>();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   scrollController.addListener(lodeMoreData);
+  // }
+
+  // void lodeMoreData() {
+  //   if (scrollController.position.extentAfter < 300) {
+  //     catagoryListController.getCategoryList();
+  //   }
+  // }
+  final ScrollController _scrollController = ScrollController();
+  final CatagoryListController _categoryListController =
+      Get.find<CatagoryListController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_loadMoreData);
+  }
+
+  void _loadMoreData() {
+    if (_scrollController.position.extentBefore < 300) {
+      _categoryListController.categoryModelList;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -29,20 +60,44 @@ class _ProductCatagoriScreenState extends State<ProductCatagoriScreen> {
               icon: const Icon(Icons.arrow_back_ios_new)),
           title: const Text('Catagori'),
         ),
-        body: SingleChildScrollView(
-            child: GridView.builder(
-          itemCount: 30,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 3.0,
-            mainAxisSpacing: 3.0,
-          ),
-          itemBuilder: (context, index) {
-            return const ProductCatagoriItems();
-          },
-        )),
+        body: GetBuilder<CatagoryListController>(builder: (controller) {
+          if (controller.initialLoadingInProgress) {
+            return const CircularProgressIndicator();
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: SingleChildScrollView(
+                      child: GridView.builder(
+                    controller: scrollController,
+                    itemCount: controller.categoryModelList.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 2.0,
+                      mainAxisSpacing: 2.0,
+                    ),
+                    itemBuilder: (context, index) {
+                      return FittedBox(
+                        child: ProductCatagoriItems(
+                          categoryModel: controller.categoryModelList[index],
+                        ),
+                      );
+                    },
+                  )),
+                ),
+              ),
+              Visibility(
+                visible: controller.inProgress,
+                child: const LinearProgressIndicator(),
+              )
+            ],
+          );
+        }),
       ),
     );
   }
