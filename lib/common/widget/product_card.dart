@@ -1,20 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:ostad_ecommers_app/app/app_colors.dart';
-import 'package:ostad_ecommers_app/app/asste_path.dart';
+import 'package:ostad_ecommers_app/common/model/product_model.dart';
 import 'package:ostad_ecommers_app/features/product/ui/screen/product_detels_screen.dart';
 
 class ProductCard extends StatelessWidget {
+  // ignore: use_super_parameters
   const ProductCard({
-    super.key,
-  });
+    Key? key,
+    required this.productModel,
+  }) : super(key: key);
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductDetailsScreen.name,
-            arguments: '12234');
+            arguments: productModel.id);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0.0),
@@ -40,8 +43,8 @@ class ProductCard extends StatelessWidget {
                       topRight: Radius.circular(8),
                       topLeft: Radius.circular(8))),
               width: 160,
-              child: SvgPicture.asset(
-                AsstePath.navLogo,
+              child: Image.network(
+                productModel.photoUrl.first,
                 height: 135,
                 width: 160,
                 fit: BoxFit.fitWidth,
@@ -60,17 +63,17 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text('Get 50% off on your first order',
+                    Text(productModel.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Colors.black45)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('\$20.00',
+                        Text('\$${productModel.currentPrice}',
                             style: TextStyle(
                                 fontSize: 16, color: AppColors.themeColor)),
                         const Wrap(

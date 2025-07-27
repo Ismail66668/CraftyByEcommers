@@ -41,7 +41,7 @@ class _WishProductListState extends State<WishProductList> {
               childAspectRatio: 0.8,
             ),
             itemBuilder: (context, index) {
-              return const FittedBox(child: ProductCard());
+              // return const FittedBox(child: ProductCard());
             },
           )),
         ),

@@ -15,19 +15,7 @@ class ProductCatagoriScreen extends StatefulWidget {
 
 class _ProductCatagoriScreenState extends State<ProductCatagoriScreen> {
   final ScrollController scrollController = ScrollController();
-  // final CatagoryListController catagoryListController =
-  //     Get.find<CatagoryListController>();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   scrollController.addListener(lodeMoreData);
-  // }
 
-  // void lodeMoreData() {
-  //   if (scrollController.position.extentAfter < 300) {
-  //     catagoryListController.getCategoryList();
-  //   }
-  // }
   final ScrollController _scrollController = ScrollController();
   final CatagoryListController _categoryListController =
       Get.find<CatagoryListController>();

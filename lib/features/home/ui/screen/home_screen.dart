@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           scrollDirection: Axis.horizontal,
           itemCount: 10,
           itemBuilder: (context, index) {
-            return const ProductCard();
+            // return const ProductCard();
           },
         ),
       ),
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [1, 2, 3, 4, 5]
             .map((e) => const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3),
-                  child: ProductCard(),
+                  // child: ProductCard(),
                 ))
             .toList(),
       ),

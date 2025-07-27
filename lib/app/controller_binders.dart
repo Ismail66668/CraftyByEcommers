@@ -8,6 +8,7 @@ import 'package:ostad_ecommers_app/features/auth/ui/controller/loging_controller
 import 'package:ostad_ecommers_app/features/auth/ui/controller/sing_up_controller.dart';
 import 'package:ostad_ecommers_app/features/auth/ui/controller/verify_otp_controller.dart';
 import 'package:ostad_ecommers_app/features/home/ui/controller/home_slider_controller.dart';
+import 'package:ostad_ecommers_app/features/product/controller/product_list_by_categary_controller.dart';
 
 class ControllerBinders extends Bindings {
   @override
@@ -21,6 +22,7 @@ class ControllerBinders extends Bindings {
     Get.put(LogingController());
     Get.put(HomeSliderController());
     Get.put(CatagoryListController());
+    Get.put(ProductByListCategoryController());
   }
 
   void _onUnAuthorize() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ostad_ecommers_app/common/model/catagory_model.dart';
 import 'package:ostad_ecommers_app/common/screen/main_botton_screen.dart';
 import 'package:ostad_ecommers_app/features/auth/email_verification.dart';
 import 'package:ostad_ecommers_app/features/auth/loging_screen.dart';
@@ -41,7 +42,7 @@ class AppRoutes {
     } else if (settings.name == MainBottonScreen.name) {
       screenWidget = const MainBottonScreen();
     } else if (settings.name == ProductListScreen.name) {
-      final String catagoriName = settings.arguments as String;
+      final CategoryModel catagoriName = settings.arguments as CategoryModel;
       screenWidget = ProductListScreen(catagoriName: catagoriName);
     } else if (settings.name == WishProductList.name) {
       screenWidget = const WishProductList();
